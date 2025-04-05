@@ -8,9 +8,12 @@ Description: This script allows you to select which classes on canvas you would 
 
 Setup 
 For mac users
+```
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
+
 
 Create a API Key by going from:
 1. Accounts settings in Canvas
@@ -29,6 +32,8 @@ API_URL = "https://umich.instructure.com"  # Replace with your Canvas URL
 API_TOKEN = "Enter your key here!"
 
 You should be set to run the code!
-''' python3 canvas_downloader.py ''' 
+``` 
+python3 canvas_downloader.py 
+```
 
 
