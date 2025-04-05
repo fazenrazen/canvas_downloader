@@ -1,4 +1,4 @@
-# canvas_downloader
+# Canvas File Downloader
 
 *This only works right now if you are just from umich, you can EDIT the canvas link on the top of the python script "canvas_downloader" for your school and it will work*
 
