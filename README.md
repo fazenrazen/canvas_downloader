@@ -28,8 +28,11 @@ The API Key looks something like this:
 ![alt text](image-2.png)
 
 After you edit these two fields in the code:
+```
 API_URL = "https://umich.instructure.com"  # Replace with your Canvas URL
 API_TOKEN = "Enter your key here!"
+```
+
 
 You should be set to run the code!
 ``` 
