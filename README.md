@@ -2,7 +2,7 @@
 
 *This only works right now if you are just from umich, you can EDIT the canvas link on the top of the python script "canvas_downloader" for your school and it will work*
 
-Description: This script allows you to select which classes on canvas you would like to download all the files from
+Description: This script allows you to select which classes on canvas you would like to download ALL the files from. This does all the past files too. 
 
 
 
