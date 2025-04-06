@@ -2,18 +2,30 @@
 
 *This only works right now if you are just from umich, you can EDIT the canvas link on the top of the python script "canvas_downloader" for your school and it will work*
 
-Description: This script allows you to select which classes on canvas you would like to download ALL the files from. This does all the past files too. 
+Description: This script allows you to select which classes on canvas you would like to download the files from. This script includes ALL the courses at that particular dashboard that are available. 
 
-
+Clone the repo or download the folder:
+```
+git clone git@github.com:fazenrazen/canvas_downloader.git
+cd canvas_downloader
+```
 
 Setup 
-For mac users
+In the terminal we will do these commands
+For mac users 
 ```
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+For Windows Command Prompt
+```
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
 
+Login to your canvas online and follow the steps below. 
 
 Create a API Key by going from:
 1. Accounts settings in Canvas
@@ -32,8 +44,6 @@ After you edit these two fields in the code:
 API_URL = "https://umich.instructure.com"  # Replace with your Canvas URL
 API_TOKEN = "Enter your key here!"
 ```
-
-
 You should be set to run the code!
 ``` 
 python3 canvas_downloader.py 
