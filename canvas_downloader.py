@@ -8,9 +8,6 @@ API_TOKEN = "Enter your key here!"
 DOWNLOAD_DIR = "canvas_files"
 LOG_FILE = "canvas_download.log"
 
-headers = {"Authorization": f"Bearer {API_TOKEN}"}
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-
 # === Setup ===
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
@@ -34,9 +31,9 @@ def get_courses():
     url = f"{API_URL}/api/v1/courses"
     params = {
         'per_page': 100,
-        'enrollment_state': 'all',   # instead of just 'active'
-        'include[]': 'term',         # optional: includes term name
-        'state[]': ['available', 'completed']  # gets active + completed
+        'enrollment_state': 'all',
+        'include[]': 'term',
+        'state[]': ['available', 'completed']
     }
     courses = []
 
@@ -80,10 +77,10 @@ def download_file(file, save_path):
     full_path = os.path.join(save_path, file_name)
 
     if os.path.exists(full_path):
-        print(f"Already exists: {file_name}")
+        logging.info(f"✅ Already exists: {file_name}")
         return
 
-    print(f"⬇️  Downloading: {file_name}")
+    logging.info(f"⬇️  Downloading: {file_name}")
     r = requests.get(file_url, headers=headers)
     r.raise_for_status()
 
@@ -91,22 +88,24 @@ def download_file(file, save_path):
         f.write(r.content)
 
 def main():
-    courses = get_courses()
-    print(f"\n🎓 Found {len(courses)} courses.\n")
+    logging.info("✨ Starting Canvas Downloader...")
 
-    print("🧾 Courses:")
+    courses = get_courses()
+    logging.info(f"\n🎓 Found {len(courses)} courses.\n")
+
+    logging.info("🧾 Courses:")
     for idx, course in enumerate(courses, start=1):
-        print(f"{idx}. {course.get('name')} (ID: {course['id']})")
+        logging.info(f"{idx}. {course.get('name')} (ID: {course['id']})")
 
     selection = input("\n🔢 Enter the course numbers you want to download (comma-separated): ").strip()
     if not selection:
-        print("❌ No selection made. Exiting.")
+        logging.info("❌ No selection made. Exiting.")
         return
 
     try:
         selected_indices = [int(x.strip()) - 1 for x in selection.split(",")]
     except ValueError:
-        print("❌ Invalid input. Please enter numbers separated by commas.")
+        logging.info("❌ Invalid input. Please enter numbers separated by commas.")
         return
 
     selected_courses = [courses[i] for i in selected_indices if 0 <= i < len(courses)]
@@ -117,7 +116,7 @@ def main():
         course_folder = os.path.join(DOWNLOAD_DIR, course_name)
         os.makedirs(course_folder, exist_ok=True)
 
-        print(f"\n📁 Downloading Course: {course_name}")
+        logging.info(f"\n📁 Downloading Course: {course_name}")
         folders = get_folders(course_id)
 
         for folder in folders:
@@ -131,9 +130,12 @@ def main():
                     download_file(file, folder_local_path)
             except requests.exceptions.HTTPError as e:
                 if e.response.status_code == 403:
-                    print(f"❌ Skipping restricted folder: {folder['full_name']}")
+                    logging.info(f"❌ Skipping restricted folder: {folder['full_name']}")
                 else:
                     raise
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logging.exception("💥 Unexpected error occurred")
