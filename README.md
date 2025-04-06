@@ -32,7 +32,7 @@ Create a API Key by going from:
 ![alt text](image.png)
 2. Create a new access token under the "Approved Integrations"
 ![alt text](image-1.png)
-3. Write in "My canvas downloader for purpose" And create a arbituary expiration date and time. SAVE the key generation here (since it is shown only ONCE) and enter the information into the python code above WITH the quotes!
+3. Write in "My canvas downloader" for the purpose blank and create a random expiration date and time. SAVE the key generation on your favorite notes app (since it is shown only ONCE) and enter the information into the python code below WITH the quotes!
 
 The API Key looks something like this:
 "1700~L9MPJL2342BXyeKxxMJJG3Fu4chCn24QaasdfamMNTChJNmU44ChzGEeashdf4GMT"
